@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #0d122b;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+h1 {
+  text-align: center;
+  font-weight: 100;
+}
+header {
+  border-bottom: 1px solid #0d122b;
+  margin-bottom: 2em;
+}
+main {
+  flex-grow: 2;
+}
+.controls {
+  text-align: center;
+}
+button {
+  font-size: 18px;
+  font-weight: 200;
+  padding: 1em;
+  width: 200px;
+  background: transparent;
+  border: 4px solid #f22f46;
+  border-radius: 4px;
+  transition: all 0.4s ease 0s;
+  cursor: pointer;
+  color: #f22f46;
+  margin-bottom: 2em;
+}
+button:hover,
+button:focus {
+  background: #f22f46;
+  color: #fff;
+}
+#recordings {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+#recordings li {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+#recordings audio {
+  border-radius: 4px;
+  margin: 0 auto 0.5em;
+}
+a {
+  color: #0d122b;
+}
+.error {
+  color: #f22f46;
+  text-align: center;
+}
+footer {
+  border-top: 1px solid #0d122b;
+  text-align: center;
+}
