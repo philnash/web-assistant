@@ -28,6 +28,23 @@ main {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  background-color: #fff;
+}
+@keyframes bg-pulse {
+  0% {
+    background-color: #fff;
+  }
+
+  50% {
+    background-color: #c7ecee;
+  }
+
+  100% {
+    backgrouond-color: #fff;
+  }
+}
+main.speaking {
+  animation: bg-pulse 1.5s alternate ease-in-out infinite;
 }
 .input {
   text-align: center;
