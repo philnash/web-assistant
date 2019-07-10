@@ -29,6 +29,8 @@ main {
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: 2em;
 }
 @keyframes bg-pulse {
   0% {
