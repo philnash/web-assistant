@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Browser speech recognition</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Browser speech recognition</h1>
+    </header>
+    <main>
+      <p id="message" hidden aria-hidden="true">
+        Your browser doesn't support Speech Recognition. Sorry.
+      </p>
+      <button id="button">Start listening</button>
+      <div id="result"></div>
+    </main>
+    <footer>
+      <p>Built with 🎙 by <a href="https://twitter.com/philnash">philnash</a></p>
+    </footer>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const button = document.getElementById("button");
+        const result = document.getElementById("result");
+        const main = document.getElementsByTagName("main")[0];
+        let listening = false;
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (typeof SR !== "undefined") {
+          const recognition = new SR();
+
+          const onStop = () => {
+            if (listening) {
+              main.classList.remove("speaking");
+              recognition.stop();
+              button.textContent = "Start listening";
+              listening = false;
+            }
+          };
+
+          const onStart = () => {
+            if (!listening) {
+              main.classList.add("speaking");
+              recognition.start();
+              button.textContent = "Stop listening";
+              listening = true;
+            }
+          };
+
+          const onResult = event => {
+            result.innerHTML = "";
+            Array.from(event.results).forEach(res => {
+              const text = document.createTextNode(res[0].transcript);
+              const p = document.createElement("p");
+              if (res.isFinal) {
+                p.classList.add("final");
+              }
+              p.appendChild(text);
+              result.appendChild(p);
+            });
+          };
+          recognition.continuous = true;
+          recognition.maxAlternatives = 1;
+          recognition.interimResults = true;
+          recognition.addEventListener("start", onStart);
+          recognition.addEventListener("end", onStop);
+          recognition.addEventListener("result", onResult);
+          button.addEventListener("click", event => {
+            listening ? stop() : start();
+          });
+        } else {
+          button.remove();
+          const message = document.getElementById("message");
+          message.removeAttribute("hidden");
+          message.setAttribute("aria-hidden", "false");
+        }
+      });
+    </script>
+  </body>
+</html>
